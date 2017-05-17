@@ -1,0 +1,8 @@
+/LuaCppZ/.autotools
+/LuaCppZ/.cproject
+/LuaCppZ/.project
+/LuaCppZ/config.log
+/LuaCppZ/.settings/*
+/LuaCppZ/autom4te.cache/*
+.deps
+*.o
