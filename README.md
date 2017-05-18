@@ -11,19 +11,6 @@ Example:
 exampleProgram.cpp
 
 ```cpp
-# LuaCppZ
-
-## C++11 Lua Wrapper
-
-
-Made to simplify the data exchange between Lua and C++.
-Currently under development.
-
-
-Example:
-exampleProgram.cpp
-
-```cpp
 #include "LuaState.hpp"
 #include "LuaTable.hpp"
 #include "LuaNumber.hpp"
@@ -117,6 +104,4 @@ int main(int argC, char** argV) {
 
 	return 0;
 }
-```
-
 ```
