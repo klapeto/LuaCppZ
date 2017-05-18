@@ -1,7 +1,7 @@
 /*
- * LuaNumber.hpp
+ * LuaNil.hpp
  *
- *  Created on: 16 Μαΐ 2017
+ *  Created on: 17 Μαΐ 2017
  *      Author: klapeto
  */
 
@@ -25,47 +25,31 @@
  *
 */
 
-#ifndef LUANUMBER_HPP_
-#define LUANUMBER_HPP_
-
-#include <lua.hpp>
+#ifndef LUANIL_HPP_
+#define LUANIL_HPP_
 
 #include "LuaValue.hpp"
 
 namespace LuaCppZ {
 
-class LuaNumber: public LuaValue {
+class LuaNil: public LuaValue {
 public:
 
-	lua_Number getValue() const {
-		return value;
-	}
-
 	void pushToLua(LuaState& state) const;
-	bool assignFromStack(LuaState& state, int stackPointer);
-
-	LuaNumber& operator=(lua_Number value) {
-		this->value = value;
-		return *this;
+	bool assignFromStack(LuaState& state, int stackPointer) {
+		return false;
 	}
 
-	LuaNumber() :
-			LuaValue(LuaValue::Type::Number), value(0.0) {
+	LuaNil() :
+			LuaValue(LuaValue::Type::Nil) {
 
 	}
 
-	LuaNumber(lua_Number value) :
-			LuaValue(LuaValue::Type::Number), value(value) {
+	~LuaNil() {
 
 	}
-
-	~LuaNumber() {
-
-	}
-private:
-	lua_Number value;
 };
 
 } /* namespace LuaCppZ */
 
-#endif /* LUANUMBER_HPP_ */
+#endif /* LUANIL_HPP_ */

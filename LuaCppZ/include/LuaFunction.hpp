@@ -1,7 +1,7 @@
 /*
- * LuaNumber.hpp
+ * LuaFunction.hpp
  *
- *  Created on: 16 Μαΐ 2017
+ *  Created on: 17 Μαΐ 2017
  *      Author: klapeto
  */
 
@@ -25,47 +25,32 @@
  *
 */
 
-#ifndef LUANUMBER_HPP_
-#define LUANUMBER_HPP_
+#ifndef LUAFUNCTION_HPP_
+#define LUAFUNCTION_HPP_
 
-#include <lua.hpp>
+#include <initializer_list>
 
-#include "LuaValue.hpp"
+#include "LuaReference.hpp"
 
 namespace LuaCppZ {
 
-class LuaNumber: public LuaValue {
+class LuaFunction: public LuaReference {
 public:
 
-	lua_Number getValue() const {
-		return value;
-	}
-
-	void pushToLua(LuaState& state) const;
 	bool assignFromStack(LuaState& state, int stackPointer);
 
-	LuaNumber& operator=(lua_Number value) {
-		this->value = value;
-		return *this;
+	void call(std::initializer_list<const LuaValue*> argumentList = { },
+			std::initializer_list<LuaValue*> returnValues = { }) const {
+		operator ()(argumentList, returnValues);
 	}
 
-	LuaNumber() :
-			LuaValue(LuaValue::Type::Number), value(0.0) {
+	void operator ()(std::initializer_list<const LuaValue*> argumentList = { },
+			std::initializer_list<LuaValue*> returnValues = { }) const;
 
-	}
-
-	LuaNumber(lua_Number value) :
-			LuaValue(LuaValue::Type::Number), value(value) {
-
-	}
-
-	~LuaNumber() {
-
-	}
-private:
-	lua_Number value;
+	LuaFunction();
+	~LuaFunction();
 };
 
 } /* namespace LuaCppZ */
 
-#endif /* LUANUMBER_HPP_ */
+#endif /* LUAFUNCTION_HPP_ */

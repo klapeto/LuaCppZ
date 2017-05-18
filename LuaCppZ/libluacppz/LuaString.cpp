@@ -1,3 +1,22 @@
+/*******************************************************************************
+ * Copyright (c) 2017 Ioannis Panagiotopoulos
+ *
+ * This file is part of Foobar.
+ *
+ * Foobar is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Foobar is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ *******************************************************************************/
+
 /*
  * LuaString.cpp
  *
@@ -11,7 +30,7 @@
 
 namespace LuaCppZ {
 
-void LuaString::pushToLua(LuaState& state) {
+void LuaString::pushToLua(LuaState& state) const {
 	if (&state != nullptr) {
 		lua_pushstring(state.getCState(), value.c_str());
 	}
@@ -20,8 +39,9 @@ void LuaString::pushToLua(LuaState& state) {
 
 bool LuaString::assignFromStack(LuaState& state, int stackPointer) {
 	if (&state != nullptr) {
-		if (lua_isstring(state.getCState(), stackPointer)) {
-			value = lua_tolstring(state.getCState(), stackPointer, nullptr);
+		lua_State* lstate = state.getCState();
+		if (lua_isstring(lstate, stackPointer)) {
+			value = lua_tolstring(lstate, stackPointer, nullptr);
 			return true;
 		}
 	}

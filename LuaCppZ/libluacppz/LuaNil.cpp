@@ -18,14 +18,23 @@
  *******************************************************************************/
 
 /*
- * LuaValue.cpp
+ * LuaNil.cpp
  *
- *  Created on: 16 Μαΐ 2017
+ *  Created on: 17 Μαΐ 2017
  *      Author: klapeto
  */
 
-#include "LuaValue.hpp"
+#include "LuaNil.hpp"
+#include "LuaState.hpp"
+#include <lua.hpp>
 
 namespace LuaCppZ {
 
+void LuaNil::pushToLua(LuaState& state) const {
+	if (&state != nullptr) {
+		lua_pushnil(state.getCState());
+	}
+}
+
 } /* namespace LuaCppZ */
+

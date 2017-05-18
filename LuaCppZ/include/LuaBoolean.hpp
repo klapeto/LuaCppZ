@@ -1,7 +1,7 @@
 /*
- * LuaNumber.hpp
+ * LuaBoolean.hpp
  *
- *  Created on: 16 Μαΐ 2017
+ *  Created on: 18 Μαΐ 2017
  *      Author: klapeto
  */
 
@@ -25,47 +25,36 @@
  *
 */
 
-#ifndef LUANUMBER_HPP_
-#define LUANUMBER_HPP_
-
-#include <lua.hpp>
+#ifndef LUABOOLEAN_HPP_
+#define LUABOOLEAN_HPP_
 
 #include "LuaValue.hpp"
 
 namespace LuaCppZ {
 
-class LuaNumber: public LuaValue {
+class LuaState;
+
+class LuaBoolean: public LuaValue {
 public:
 
-	lua_Number getValue() const {
+	bool getValue() const {
 		return value;
 	}
 
 	void pushToLua(LuaState& state) const;
 	bool assignFromStack(LuaState& state, int stackPointer);
 
-	LuaNumber& operator=(lua_Number value) {
-		this->value = value;
-		return *this;
-	}
-
-	LuaNumber() :
-			LuaValue(LuaValue::Type::Number), value(0.0) {
+	LuaBoolean(bool value = false) :
+			LuaValue(LuaValue::Type::Boolean), value(value) {
 
 	}
-
-	LuaNumber(lua_Number value) :
-			LuaValue(LuaValue::Type::Number), value(value) {
-
-	}
-
-	~LuaNumber() {
+	~LuaBoolean() {
 
 	}
 private:
-	lua_Number value;
+	bool value;
 };
 
 } /* namespace LuaCppZ */
 
-#endif /* LUANUMBER_HPP_ */
+#endif /* LUABOOLEAN_HPP_ */

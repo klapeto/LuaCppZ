@@ -1,7 +1,7 @@
 /*
- * LuaNumber.hpp
+ * LuaBoolean.cpp
  *
- *  Created on: 16 Μαΐ 2017
+ *  Created on: 18 Μαΐ 2017
  *      Author: klapeto
  */
 
@@ -25,47 +25,27 @@
  *
 */
 
-#ifndef LUANUMBER_HPP_
-#define LUANUMBER_HPP_
-
+#include "LuaBoolean.hpp"
+#include "LuaState.hpp"
 #include <lua.hpp>
-
-#include "LuaValue.hpp"
 
 namespace LuaCppZ {
 
-class LuaNumber: public LuaValue {
-public:
-
-	lua_Number getValue() const {
-		return value;
+void LuaBoolean::pushToLua(LuaState& state) const {
+	if (&state != nullptr) {
+		lua_pushboolean(state.getCState(), value);
 	}
+}
 
-	void pushToLua(LuaState& state) const;
-	bool assignFromStack(LuaState& state, int stackPointer);
-
-	LuaNumber& operator=(lua_Number value) {
-		this->value = value;
-		return *this;
+bool LuaBoolean::assignFromStack(LuaState& state, int stackPointer) {
+	if (&state != nullptr) {
+		lua_State* lstate = state.getCState();
+		if (lua_isboolean(lstate, stackPointer)) {
+			value = lua_toboolean(lstate, stackPointer);
+			return true;
+		}
 	}
-
-	LuaNumber() :
-			LuaValue(LuaValue::Type::Number), value(0.0) {
-
-	}
-
-	LuaNumber(lua_Number value) :
-			LuaValue(LuaValue::Type::Number), value(value) {
-
-	}
-
-	~LuaNumber() {
-
-	}
-private:
-	lua_Number value;
-};
+	return false;
+}
 
 } /* namespace LuaCppZ */
-
-#endif /* LUANUMBER_HPP_ */

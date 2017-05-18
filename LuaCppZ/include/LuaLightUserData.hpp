@@ -1,7 +1,7 @@
 /*
- * LuaNumber.hpp
+ * LuaLightUserData.hpp
  *
- *  Created on: 16 Μαΐ 2017
+ *  Created on: 18 Μαΐ 2017
  *      Author: klapeto
  */
 
@@ -25,47 +25,51 @@
  *
 */
 
-#ifndef LUANUMBER_HPP_
-#define LUANUMBER_HPP_
-
-#include <lua.hpp>
+#ifndef LUALIGHTUSERDATA_HPP_
+#define LUALIGHTUSERDATA_HPP_
 
 #include "LuaValue.hpp"
+#include "LuaState.hpp"
+#include <lua.hpp>
 
 namespace LuaCppZ {
 
-class LuaNumber: public LuaValue {
+template<typename T>
+class LuaLightUserData: public LuaValue {
 public:
 
-	lua_Number getValue() const {
-		return value;
+	T* operator->() {
+		return ptr;
 	}
 
-	void pushToLua(LuaState& state) const;
-	bool assignFromStack(LuaState& state, int stackPointer);
-
-	LuaNumber& operator=(lua_Number value) {
-		this->value = value;
-		return *this;
+	void pushToLua(LuaState& state) const {
+		if (&state != nullptr) {
+			lua_pushlightuserdata(state.getCState(), static_cast<void*>(ptr));
+		}
 	}
 
-	LuaNumber() :
-			LuaValue(LuaValue::Type::Number), value(0.0) {
-
+	bool assignFromStack(LuaState& state, int stackPointer) {
+		if (&state != nullptr) {
+			lua_State* lstate = state.getCState();
+			if (lua_islightuserdata(lstate, stackPointer)) {
+				ptr = lua_touserdata(lstate, stackPointer);
+				return true;
+			}
+		}
+		return false;
 	}
 
-	LuaNumber(lua_Number value) :
-			LuaValue(LuaValue::Type::Number), value(value) {
+	LuaLightUserData(T* ptr = nullptr) :
+			LuaValue(LuaValue::Type::LightUserData), ptr(ptr) {
 
 	}
-
-	~LuaNumber() {
+	~LuaLightUserData() {
 
 	}
 private:
-	lua_Number value;
+	T* ptr;
 };
 
 } /* namespace LuaCppZ */
 
-#endif /* LUANUMBER_HPP_ */
+#endif /* LUALIGHTUSERDATA_HPP_ */

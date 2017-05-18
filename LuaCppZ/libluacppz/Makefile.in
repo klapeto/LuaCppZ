@@ -134,7 +134,10 @@ libluacppz_la_LIBADD =
 am_libluacppz_la_OBJECTS = libluacppz_la-LuaState.lo \
 	libluacppz_la-LuaValue.lo libluacppz_la-LuaReference.lo \
 	libluacppz_la-LuaTable.lo libluacppz_la-Tokenizer.lo \
-	libluacppz_la-LuaNumber.lo libluacppz_la-LuaString.lo
+	libluacppz_la-LuaNumber.lo libluacppz_la-LuaString.lo \
+	libluacppz_la-LuaNil.lo libluacppz_la-LuaFunction.lo \
+	libluacppz_la-LuaUserData.lo libluacppz_la-LuaLightUserData.lo \
+	libluacppz_la-LuaBoolean.lo
 libluacppz_la_OBJECTS = $(am_libluacppz_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -356,7 +359,12 @@ LuaReference.cpp\
 LuaTable.cpp \
 Tokenizer.cpp \
 LuaNumber.cpp \
-LuaString.cpp
+LuaString.cpp \
+LuaNil.cpp \
+LuaFunction.cpp \
+LuaUserData.cpp \
+LuaLightUserData.cpp \
+LuaBoolean.cpp
 
 
 # Linker options libTestProgram
@@ -443,11 +451,16 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libluacppz_la-LuaBoolean.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libluacppz_la-LuaFunction.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libluacppz_la-LuaLightUserData.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libluacppz_la-LuaNil.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libluacppz_la-LuaNumber.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libluacppz_la-LuaReference.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libluacppz_la-LuaState.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libluacppz_la-LuaString.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libluacppz_la-LuaTable.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libluacppz_la-LuaUserData.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libluacppz_la-LuaValue.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libluacppz_la-Tokenizer.Plo@am__quote@
 
@@ -523,6 +536,41 @@ libluacppz_la-LuaString.lo: LuaString.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='LuaString.cpp' object='libluacppz_la-LuaString.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libluacppz_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libluacppz_la-LuaString.lo `test -f 'LuaString.cpp' || echo '$(srcdir)/'`LuaString.cpp
+
+libluacppz_la-LuaNil.lo: LuaNil.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libluacppz_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libluacppz_la-LuaNil.lo -MD -MP -MF $(DEPDIR)/libluacppz_la-LuaNil.Tpo -c -o libluacppz_la-LuaNil.lo `test -f 'LuaNil.cpp' || echo '$(srcdir)/'`LuaNil.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libluacppz_la-LuaNil.Tpo $(DEPDIR)/libluacppz_la-LuaNil.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='LuaNil.cpp' object='libluacppz_la-LuaNil.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libluacppz_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libluacppz_la-LuaNil.lo `test -f 'LuaNil.cpp' || echo '$(srcdir)/'`LuaNil.cpp
+
+libluacppz_la-LuaFunction.lo: LuaFunction.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libluacppz_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libluacppz_la-LuaFunction.lo -MD -MP -MF $(DEPDIR)/libluacppz_la-LuaFunction.Tpo -c -o libluacppz_la-LuaFunction.lo `test -f 'LuaFunction.cpp' || echo '$(srcdir)/'`LuaFunction.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libluacppz_la-LuaFunction.Tpo $(DEPDIR)/libluacppz_la-LuaFunction.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='LuaFunction.cpp' object='libluacppz_la-LuaFunction.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libluacppz_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libluacppz_la-LuaFunction.lo `test -f 'LuaFunction.cpp' || echo '$(srcdir)/'`LuaFunction.cpp
+
+libluacppz_la-LuaUserData.lo: LuaUserData.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libluacppz_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libluacppz_la-LuaUserData.lo -MD -MP -MF $(DEPDIR)/libluacppz_la-LuaUserData.Tpo -c -o libluacppz_la-LuaUserData.lo `test -f 'LuaUserData.cpp' || echo '$(srcdir)/'`LuaUserData.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libluacppz_la-LuaUserData.Tpo $(DEPDIR)/libluacppz_la-LuaUserData.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='LuaUserData.cpp' object='libluacppz_la-LuaUserData.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libluacppz_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libluacppz_la-LuaUserData.lo `test -f 'LuaUserData.cpp' || echo '$(srcdir)/'`LuaUserData.cpp
+
+libluacppz_la-LuaLightUserData.lo: LuaLightUserData.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libluacppz_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libluacppz_la-LuaLightUserData.lo -MD -MP -MF $(DEPDIR)/libluacppz_la-LuaLightUserData.Tpo -c -o libluacppz_la-LuaLightUserData.lo `test -f 'LuaLightUserData.cpp' || echo '$(srcdir)/'`LuaLightUserData.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libluacppz_la-LuaLightUserData.Tpo $(DEPDIR)/libluacppz_la-LuaLightUserData.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='LuaLightUserData.cpp' object='libluacppz_la-LuaLightUserData.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libluacppz_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libluacppz_la-LuaLightUserData.lo `test -f 'LuaLightUserData.cpp' || echo '$(srcdir)/'`LuaLightUserData.cpp
+
+libluacppz_la-LuaBoolean.lo: LuaBoolean.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libluacppz_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libluacppz_la-LuaBoolean.lo -MD -MP -MF $(DEPDIR)/libluacppz_la-LuaBoolean.Tpo -c -o libluacppz_la-LuaBoolean.lo `test -f 'LuaBoolean.cpp' || echo '$(srcdir)/'`LuaBoolean.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libluacppz_la-LuaBoolean.Tpo $(DEPDIR)/libluacppz_la-LuaBoolean.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='LuaBoolean.cpp' object='libluacppz_la-LuaBoolean.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libluacppz_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libluacppz_la-LuaBoolean.lo `test -f 'LuaBoolean.cpp' || echo '$(srcdir)/'`LuaBoolean.cpp
 
 mostlyclean-libtool:
 	-rm -f *.lo

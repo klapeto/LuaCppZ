@@ -15,6 +15,8 @@ exampleProgram.cpp
 #include "LuaTable.hpp"
 #include "LuaNumber.hpp"
 #include "LuaString.hpp"
+#include "LuaFunction.hpp"
+#include "LuaUserData.hpp"
 
 #include <iostream>
 
@@ -46,7 +48,7 @@ int main(int argC, char** argV) {
 
 		if (!table.getField(LuaString("Eleos"), ret)) {
 			std::cout
-					<< "Could get the string field 'Eleos'. Is it really a string in Lua?"
+					<< "Couldn't get the string field 'Eleos'. Is it really a string in Lua?"
 					<< std::endl;
 			return 0;
 		}
@@ -58,11 +60,45 @@ int main(int argC, char** argV) {
 		// Print the new content
 		if (!table.getField(LuaString("Eleos"), ret)) {
 			std::cout
-					<< "Could get the string field 'Eleos'. Is it really a string in Lua?"
+					<< "Couldn't get the string field 'Eleos'. Is it really a string in Lua?"
 					<< std::endl;
 			return 0;
 		}
 		std::cout << "Table.z.Eleos = " << ret.getValue() << std::endl;
+
+		{
+
+			// Get a lua function from the table
+			LuaFunction func;
+			table.getField(LuaString("func"), func);
+
+			// Define the argument, and expected return values
+			LuaString orisma("Orisma!");
+			LuaNumber ret1;
+			LuaString ret2, ret3;
+
+			// Call the Lua function
+			func( { &orisma }, { &ret1, &ret2, &ret3 });
+
+			// Print the return values
+			std::cout << "Ret1 = " << ret1.getValue() << std::endl;
+			std::cout << "Ret2 = " << ret2.getValue() << std::endl;
+			std::cout << "Ret3 = " << ret3.getValue() << std::endl;
+
+		}
+
+		{
+
+			// Iterate to all fields of the table and execute the Lamda function for each
+			table.forEach([](const LuaValue& key, const LuaValue& value) {
+
+				// Check if the value is string
+					if (value.getType() == LuaValue::Type::String) {
+						std::cout << reinterpret_cast<const LuaString*>(&value)->getValue()<< std::endl;
+					}
+
+				});
+		}
 
 	}
 

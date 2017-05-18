@@ -15,7 +15,12 @@ LuaReference.cpp\
 LuaTable.cpp \
 Tokenizer.cpp \
 LuaNumber.cpp \
-LuaString.cpp
+LuaString.cpp \
+LuaNil.cpp \
+LuaFunction.cpp \
+LuaUserData.cpp \
+LuaLightUserData.cpp \
+LuaBoolean.cpp
 
 # Linker options libTestProgram
 libluacppz_la_LDFLAGS = $(lua51_LIBS)
