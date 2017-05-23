@@ -6,19 +6,43 @@
 Made to simplify the data exchange between Lua and C++.
 Currently under development.
 
+Provides a simple interface for dealing with Lua tables and functions
+inside the C++.
 
+
+---------------------------------------------
+Building
+--------------------------
+Curently tested under Linux Ubuntu 16.04
+with GCC 6.2.0
+
+The library requires
+  * Compiler with C++11 support (Eg. GCC 4.8+)
+  * Lua 5.1+ (devel)
+	
+On the source dir run:
+```bash
+	./configure
+	make -j(number of cpu cores)
+	sudo make install
+```
+	
+If everything went well, then you can start using LuaCppZ.
+
+--------------------------------------------
 Example:
+--------
 exampleProgram.cpp
 
 ```cpp
-#include "LuaState.hpp"
-#include "LuaTable.hpp"
-#include "LuaNumber.hpp"
-#include "LuaString.hpp"
-#include "LuaFunction.hpp"
-#include "LuaUserData.hpp"
-
+#include <LuaCppZ/LuaFunction.hpp>
+#include <LuaCppZ/LuaNumber.hpp>
+#include <LuaCppZ/LuaState.hpp>
+#include <LuaCppZ/LuaString.hpp>
+#include <LuaCppZ/LuaTable.hpp>
+#include <LuaCppZ/LuaValue.hpp>
 #include <iostream>
+#include <string>
 
 using namespace LuaCppZ;
 
@@ -38,7 +62,7 @@ int main(int argC, char** argV) {
 		// Retrieve the Lua table Table.z
 		LuaTable table;
 
-		if (!lua.getVariable("Table.z", table)) {
+		if (!lua.getVariable("Table.a", table)) {
 			std::cout << "Could get table 'Table.z'" << std::endl;
 			return 0;
 		}
@@ -105,3 +129,4 @@ int main(int argC, char** argV) {
 	return 0;
 }
 ```
+
