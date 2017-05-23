@@ -1,20 +1,20 @@
 /*******************************************************************************
  * Copyright (c) 2017 Ioannis Panagiotopoulos
  *
- * This file is part of Foobar.
+ * This file is part of LuaCppZ.
  *
- * Foobar is free software: you can redistribute it and/or modify
+ * LuaCppZ is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Foobar is distributed in the hope that it will be useful,
+ * LuaCppZ is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with LuaCppZ.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 
 /*
@@ -24,9 +24,10 @@
  *      Author: klapeto
  */
 
-#include "LuaState.hpp"
-#include "LuaTable.hpp"
-#include "Tokenizer.hpp"
+
+#include <LuaCppZ/LuaReference.hpp>
+#include <LuaCppZ/LuaState.hpp>
+#include <LuaCppZ/Tokenizer.hpp>
 #include <iostream>
 
 #define saveStackPointer() int sp = lua_gettop(lstate)
@@ -96,6 +97,7 @@ void LuaState::releaseReference(LuaReference& reference) {
 	if (&reference != nullptr) {
 		lua_unref(lstate, reference.getReference());
 		references.erase(&reference);
+		reference.invalidate();
 	}
 }
 
@@ -105,6 +107,22 @@ bool LuaState::getVariable(const std::string& name, LuaValue& value) {
 	bool ret = value.assignFromStack(*this, -1);
 	restoreStackPointer();
 	return ret;
+}
+
+void LuaState::startGarbageCollection() {
+	lua_gc(lstate, LUA_GCRESTART, 0);
+}
+
+void LuaState::performGarbageCollection() {
+	lua_gc(lstate, LUA_GCCOLLECT, 0);
+}
+
+int LuaState::getMemoryUsed() const {
+	return lua_gc(lstate, LUA_GCCOUNT, 0);
+}
+
+void LuaState::stopGarbageCollection() {
+	lua_gc(lstate, LUA_GCSTOP, 0);
 }
 
 void LuaState::pushValue(const std::string& name) {
@@ -123,11 +141,15 @@ void LuaState::pushValue(const std::string& name) {
 			lua_pushstring(lstate, token.c_str());
 			lua_gettable(lstate, -2);
 
+			if (lua_isnil(lstate, -1)) {
+				std::cerr << "Warning! The field: '" << token
+						<< "' from the Lua expression : '" << name
+						<< "' does not exist!\n";
+			}
 			if (!lua_istable(lstate, -1)) {
 				break;
 			}
 		}
-
 	}
 }
 

@@ -1,6 +1,6 @@
 /*
  ============================================================================
- Name        : exampleProgram.c
+ Name        : exampleProgram.cpp
  Author      : klapeto
  Version     :
  Copyright   : Ioannis Panagiotopoulos
@@ -23,24 +23,25 @@
  * by the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Foobar is distributed in the hope that it will be useful,
+ * LuaCppZ is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with LuaCppZ.  If not, see <http://www.gnu.org/licenses/>.
  *
-*/
+ */
 
-#include "LuaState.hpp"
-#include "LuaTable.hpp"
-#include "LuaNumber.hpp"
-#include "LuaString.hpp"
-#include "LuaFunction.hpp"
-#include "LuaUserData.hpp"
 
+#include <LuaCppZ/LuaFunction.hpp>
+#include <LuaCppZ/LuaNumber.hpp>
+#include <LuaCppZ/LuaState.hpp>
+#include <LuaCppZ/LuaString.hpp>
+#include <LuaCppZ/LuaTable.hpp>
+#include <LuaCppZ/LuaValue.hpp>
 #include <iostream>
+#include <string>
 
 using namespace LuaCppZ;
 
@@ -60,7 +61,7 @@ int main(int argC, char** argV) {
 		// Retrieve the Lua table Table.z
 		LuaTable table;
 
-		if (!lua.getVariable("Table.z", table)) {
+		if (!lua.getVariable("Table.a", table)) {
 			std::cout << "Could get table 'Table.z'" << std::endl;
 			return 0;
 		}

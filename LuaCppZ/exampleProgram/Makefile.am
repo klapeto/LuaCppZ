@@ -20,11 +20,7 @@ ACLOCAL_AMFLAGS=-I ../m4
 # Sources for the a.out 
 exampleProgram_SOURCES= exampleProgram.cpp
 
-# Libraries for a.out
-exampleProgram_LDADD = $(top_srcdir)/libluacppz/libluacppz.la
-
-# Linker options for a.out
-exampleProgram_LDFLAGS = -rpath `cd $(top_srcdir);pwd`/libluacppz/.libs
+exampleProgram_LDFLAGS = $(top_builddir)/libluacppz/libluacppz.la
 
 # Compiler options for a.out
 exampleProgram_CPPFLAGS = -I$(top_srcdir)/include $(lua51_CFLAGS)

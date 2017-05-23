@@ -15,13 +15,13 @@
  * by the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Foobar is distributed in the hope that it will be useful,
+ * LuaCppZ is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with LuaCppZ.  If not, see <http://www.gnu.org/licenses/>.
  *
 */
 
@@ -34,6 +34,9 @@
 
 namespace LuaCppZ {
 
+/**
+ * Template for creating User data inside the Lua environment
+ */
 template<typename T>
 class LuaUserData: public LuaReference {
 public:
@@ -51,14 +54,28 @@ public:
 		return false;
 	}
 
+	/**
+	 * Gets the size of the user data in number of elements
+	 * @return The number of elements reside in the pointer
+	 */
 	size_t getSize() const {
 		return size;
 	}
 
+	/**
+	 * Gets the pointer to the data
+	 * @return The pointer
+	 */
 	T* operator->() {
 		return ptr;
 	}
 
+	/**
+	 * Gets a specific element from the subscript provided
+	 * \notice Be advised that of the bounds'
+	 * @param index The index in array
+	 * @return The element
+	 */
 	T* operator[](size_t index) {
 		if (ptr != nullptr) {
 			if (index < size) {
@@ -68,11 +85,21 @@ public:
 		return ptr;
 	}
 
+	/**
+	 * Constructs an Empty LuaUserData with no data (Null)
+	 */
 	LuaUserData() :
 			LuaReference(LuaValue::Type::UserData), size(0), ptr(nullptr) {
 
 	}
 
+	/**
+	 * Constructs a LuaUserData object from the LuaState provided and amount of objects
+	 * specified from the size argument
+	 *
+	 * @param state The LuaState to construct the data
+	 * @param size The amount of objects to construct
+	 */
 	LuaUserData(LuaState& state, size_t size = 1) :
 			LuaReference(LuaValue::Type::UserData), size(size), ptr(nullptr) {
 		if (&state != nullptr && size != 0) {

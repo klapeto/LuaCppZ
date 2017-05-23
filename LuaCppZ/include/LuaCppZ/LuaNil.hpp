@@ -1,7 +1,7 @@
 /*
- * LuaNumber.hpp
+ * LuaNil.hpp
  *
- *  Created on: 16 Μαΐ 2017
+ *  Created on: 17 Μαΐ 2017
  *      Author: klapeto
  */
 
@@ -15,57 +15,47 @@
  * by the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Foobar is distributed in the hope that it will be useful,
+ * LuaCppZ is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with LuaCppZ.  If not, see <http://www.gnu.org/licenses/>.
  *
 */
 
-#ifndef LUANUMBER_HPP_
-#define LUANUMBER_HPP_
-
-#include <lua.hpp>
+#ifndef LUANIL_HPP_
+#define LUANIL_HPP_
 
 #include "LuaValue.hpp"
 
 namespace LuaCppZ {
 
-class LuaNumber: public LuaValue {
+/**
+ * Placeholder class for pushing nil values to Lua environment
+ */
+class LuaNil: public LuaValue {
 public:
 
-	lua_Number getValue() const {
-		return value;
-	}
-
 	void pushToLua(LuaState& state) const;
-	bool assignFromStack(LuaState& state, int stackPointer);
-
-	LuaNumber& operator=(lua_Number value) {
-		this->value = value;
-		return *this;
+	bool assignFromStack(LuaState& state, int stackPointer) {
+		return false;
 	}
 
-	LuaNumber() :
-			LuaValue(LuaValue::Type::Number), value(0.0) {
-
-	}
-
-	LuaNumber(lua_Number value) :
-			LuaValue(LuaValue::Type::Number), value(value) {
+	/**
+	 * Constructs a LuaNil object
+	 */
+	LuaNil() :
+			LuaValue(LuaValue::Type::Nil) {
 
 	}
 
-	~LuaNumber() {
+	~LuaNil() {
 
 	}
-private:
-	lua_Number value;
 };
 
 } /* namespace LuaCppZ */
 
-#endif /* LUANUMBER_HPP_ */
+#endif /* LUANIL_HPP_ */

@@ -1,7 +1,7 @@
 /*
- * LuaNil.hpp
+ * Tokenizer.hpp
  *
- *  Created on: 17 Μαΐ 2017
+ *  Created on: 16 Μαΐ 2017
  *      Author: klapeto
  */
 
@@ -15,41 +15,40 @@
  * by the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Foobar is distributed in the hope that it will be useful,
+ * LuaCppZ is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with LuaCppZ.  If not, see <http://www.gnu.org/licenses/>.
  *
 */
 
-#ifndef LUANIL_HPP_
-#define LUANIL_HPP_
+#ifndef TOKENIZER_HPP_
+#define TOKENIZER_HPP_
 
-#include "LuaValue.hpp"
+#include <list>
+#include <string>
 
 namespace LuaCppZ {
 
-class LuaNil: public LuaValue {
+/**
+ * Helper class for providing string operations
+ */
+class Tokenizer {
 public:
 
-	void pushToLua(LuaState& state) const;
-	bool assignFromStack(LuaState& state, int stackPointer) {
-		return false;
-	}
-
-	LuaNil() :
-			LuaValue(LuaValue::Type::Nil) {
-
-	}
-
-	~LuaNil() {
-
-	}
+	/**
+	 * Parses the str to break it into tokens
+	 * @param list the std::list<std::string> to put the tokens
+	 * @param str The string to be parsed
+	 * @param delimiter The character that seperates the tokens inside the str
+	 */
+	static void parse(std::list<std::string>& list, const std::string& str,
+			char delimiter);
 };
 
 } /* namespace LuaCppZ */
 
-#endif /* LUANIL_HPP_ */
+#endif /* TOKENIZER_HPP_ */

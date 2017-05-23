@@ -15,13 +15,13 @@
  * by the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Foobar is distributed in the hope that it will be useful,
+ * LuaCppZ is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with LuaCppZ.  If not, see <http://www.gnu.org/licenses/>.
  *
 */
 
@@ -34,9 +34,16 @@ namespace LuaCppZ {
 
 class LuaState;
 
+/**
+ * Class for passing and retrieving Boolean values from and to Lua environment
+ */
 class LuaBoolean: public LuaValue {
 public:
 
+	/**
+	 * Returns the value of this boolean
+	 * @return the value of this boolean
+	 */
 	bool getValue() const {
 		return value;
 	}
@@ -44,10 +51,14 @@ public:
 	void pushToLua(LuaState& state) const;
 	bool assignFromStack(LuaState& state, int stackPointer);
 
+	/**
+	 * Constructs a LuaBoolean and assigns the value (Default = false)
+	 */
 	LuaBoolean(bool value = false) :
 			LuaValue(LuaValue::Type::Boolean), value(value) {
 
 	}
+
 	~LuaBoolean() {
 
 	}

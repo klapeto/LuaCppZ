@@ -1,14 +1,14 @@
 # These files will end up in the install include directory
 # For example, /usr/include
-include_HEADERS = LuaFunction.hpp \
-LuaLightUserData.hpp \
-LuaNil.hpp \
-LuaNumber.hpp \
-LuaReference.hpp \
-LuaState.hpp \
-LuaString.hpp \
-LuaTable.hpp \
-LuaUserData.hpp \
-LuaValue.hpp \
-Tokenizer.hpp \
-LuaBoolean.hpp
+include_HEADERS = LuaCppZ/LuaFunction.hpp \
+LuaCppZ/LuaBoolean.hpp \
+LuaCppZ/LuaLightUserData.hpp \
+LuaCppZ/LuaNil.hpp \
+LuaCppZ/LuaNumber.hpp \
+LuaCppZ/LuaReference.hpp \
+LuaCppZ/LuaState.hpp \
+LuaCppZ/LuaString.hpp \
+LuaCppZ/LuaTable.hpp \
+LuaCppZ/LuaUserData.hpp \
+LuaCppZ/LuaValue.hpp \
+LuaCppZ/Tokenizer.hpp

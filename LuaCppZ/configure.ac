@@ -1,12 +1,14 @@
 dnl Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
-AC_INIT(LuaCppZ, 1.0)
+AC_INIT(LuaCppZ, 1.0.0)
 AC_PROG_CXX
 
 AC_CANONICAL_SYSTEM
 
 AC_CONFIG_MACRO_DIR([m4])
+
+AM_PROG_CC_C_O
 
 dnl Initialize automake
 AM_INIT_AUTOMAKE([subdir-objects])

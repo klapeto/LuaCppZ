@@ -1,20 +1,20 @@
 /*******************************************************************************
  * Copyright (c) 2017 Ioannis Panagiotopoulos
  *
- * This file is part of Foobar.
+ * This file is part of LuaCppZ.
  *
- * Foobar is free software: you can redistribute it and/or modify
+ * LuaCppZ is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Foobar is distributed in the hope that it will be useful,
+ * LuaCppZ is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with LuaCppZ.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 
 /*
@@ -25,15 +25,15 @@
  */
 
 #include <lua.hpp>
-#include <LuaBoolean.hpp>
-#include <LuaFunction.hpp>
-#include <LuaLightUserData.hpp>
-#include <LuaNumber.hpp>
-#include <LuaState.hpp>
-#include <LuaString.hpp>
-#include <LuaTable.hpp>
-#include <LuaUserData.hpp>
-#include <LuaValue.hpp>
+#include <LuaCppZ/LuaBoolean.hpp>
+#include <LuaCppZ/LuaFunction.hpp>
+#include <LuaCppZ/LuaLightUserData.hpp>
+#include <LuaCppZ/LuaNumber.hpp>
+#include <LuaCppZ/LuaState.hpp>
+#include <LuaCppZ/LuaString.hpp>
+#include <LuaCppZ/LuaTable.hpp>
+#include <LuaCppZ/LuaUserData.hpp>
+#include <LuaCppZ/LuaValue.hpp>
 
 #define saveStackPointer(lstate) int sp = lua_gettop(lstate)
 #define restoreStackPointer(lstate) lua_settop(lstate, sp)

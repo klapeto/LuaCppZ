@@ -1,1 +1,5 @@
+2017-05-23  klapeto  <yiannispana13@gmail.com>
+
+	* ChangeLog: Added Garbage collection fucntions to the LuaState
+
 

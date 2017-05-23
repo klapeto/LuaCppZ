@@ -15,13 +15,13 @@
  * by the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Foobar is distributed in the hope that it will be useful,
+ * LuaCppZ is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with LuaCppZ.  If not, see <http://www.gnu.org/licenses/>.
  *
 */
 
@@ -34,10 +34,17 @@
 
 namespace LuaCppZ {
 
+/**
+ * Template for passing and retrieving Light user data from and to Lua environment
+ */
 template<typename T>
 class LuaLightUserData: public LuaValue {
 public:
 
+	/**
+	 * Retrieves the User Data pointer
+	 * @return The pointer
+	 */
 	T* operator->() {
 		return ptr;
 	}
@@ -59,6 +66,9 @@ public:
 		return false;
 	}
 
+	/**
+	 * Constructs a LightUserData object with the pointer provided (default = nullptr)
+	 */
 	LuaLightUserData(T* ptr = nullptr) :
 			LuaValue(LuaValue::Type::LightUserData), ptr(ptr) {
 
